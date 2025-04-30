@@ -3,7 +3,7 @@ import cv2
 clicked = False                                                          #Setting up global variables
 b = g = r = x_pos = y_pos = 0
 
-def show_color(event, x, y, flags, param):
+def show_color(event, x, y, flags, param):                                  #Using Mouse callback function
     global b, g, r, x_pos, y_pos, clicked
     if event == cv2.EVENT_LBUTTONDOWN:
         clicked = True
@@ -11,7 +11,7 @@ def show_color(event, x, y, flags, param):
         y_pos= y
         b,g,r = frame[y,x]
 
-cap=cv2.VideoCapture(0)
+cap=cv2.VideoCapture(0)                                                      #opening webcam
 cv2.namedWindow("Color Detector")
 cv2.setMouseCallback("Color Detector", show_color)
 
@@ -21,9 +21,9 @@ while True:
         break
 
     if clicked:
-        cv2.rectangle(frame,(20,20),(220,60), (int(b), int(g), int(r)), -1)
+        cv2.rectangle(frame,(20,20),(220,60), (int(b), int(g), int(r)), -1)  #Drawing a rectangle showing the colour
         text = f"B: {b} G : {g} R: {r}"
-        brightness = int(b) + int(g) + int(r)
+        brightness = int(b) + int(g) + int(r)                                #Chosing the colour depending on the brightness
         text_color=(0,0,0) if brightness > 400 else (255,255,255)
         cv2.putText(frame, text,(30,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7,text_color,2)
 
